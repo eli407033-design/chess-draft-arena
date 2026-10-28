@@ -19,3 +19,17 @@ test('move key captures full multi-jump path',()=>{assert.equal(draftMoveKey({fr
 test('men may capture backwards while ordinary movement remains forward-only',()=>{
  const s=initialDraft();s.board=Array(64).fill(null);s.board[3*8+3]={side:'w',king:false};s.board[4*8+4]={side:'b',king:false};s.board[7*8+0]={side:'b',king:false};s.turn='w';const moves=getDraftMoves(s);assert.ok(moves.some(m=>m.from===27&&m.path[0]===45&&m.captures.includes(36)));
 });
+
+test('multi-capture position exposes both complete route choices',()=>{
+ const s=initialDraft();s.board=Array(64).fill(null);
+ s.board[5*8+2]={side:'w',king:false};
+ s.board[4*8+1]={side:'b',king:false};
+ s.board[2*8+1]={side:'b',king:false};
+ s.board[4*8+3]={side:'b',king:false};
+ s.board[2*8+5]={side:'b',king:false};
+ s.turn='w';
+ const routes=getDraftMoves(s,'w').filter(m=>m.from===5*8+2);
+ assert.equal(routes.length,2);
+ assert.ok(routes.every(m=>m.captures.length===2));
+ assert.deepEqual(routes.map(m=>m.path).sort((a,b)=>a[0]-b[0]),[[3*8+0,1*8+2],[3*8+4,1*8+6]]);
+});
