@@ -1,0 +1,25 @@
+CHESS & DRAFT ARENA — PHYSICAL BOARD + AUTOMATIC VICTORY UPDATE
+
+This update styles both game boards to resemble a real tabletop set:
+- black/charcoal and ivory chess squares
+- dark, layered board frame with a raised wooden/metal edge and perspective
+- sculpted-looking chess pieces using highlights and multiple shadows
+- raised draught/checker discs with bevels and different coloured crowns for each side
+- responsive board sizing for desktop, laptop and mobile screens
+
+Automatic result handling:
+- Chess checkmate and all chess draw/game-over conditions are detected after each move.
+- Draft ends automatically when a side has no pieces or no legal moves.
+- The clock, resignation and terminal results stop the game and show the victory/draw overlay.
+- The board ignores further moves once the match is finished.
+- Match result is stored in local match history.
+
+HOW TO APPLY SAFELY
+1. Stop Vite in its terminal with Ctrl+C.
+2. Make a backup copy of your current project folder.
+3. Extract this ZIP.
+4. Copy the contents of the extracted chess-draft-arena folder into your existing project folder and replace files when prompted.
+5. Open a terminal in the project folder and run: npm run dev
+6. Refresh the browser with Ctrl+Shift+R.
+
+If package.json has not changed, npm install is not required. For online rooms, run `npm run server` in a second terminal.
