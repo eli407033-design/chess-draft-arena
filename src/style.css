@@ -178,3 +178,43 @@ body:has(.screen[data-screen="game"].active) .black-piece{color:#151619!importan
  body:has(.screen[data-screen="game"].active) .topbar{padding-bottom:4px}
  body:has(.screen[data-screen="game"].active) .board-frame{width:min(100%,min(760px,calc(100dvh - 165px),calc(100vw - 390px)))!important;max-width:min(100%,min(760px,calc(100dvh - 165px),calc(100vw - 390px)))!important}
 }
+
+
+/* Player-relative board orientation: the BLACK seat must see its pieces at the bottom.
+   The physical-board refinement above set .board transform with !important, so this
+   more-specific rule deliberately overrides it when the flipped class is active. */
+body:has(.screen[data-screen="game"].active) .board.flipped{
+  transform:rotate(180deg) translateZ(1px)!important;
+}
+body:has(.screen[data-screen="game"].active) .board.flipped .square{
+  transform:rotate(180deg)!important;
+}
+
+/* Draughts route picker: let players deliberately choose between complete multi-capture paths. */
+.capture-route-modal{
+  display:none;position:fixed;inset:0;z-index:100;background:rgba(3,5,14,.82);
+  backdrop-filter:blur(9px);padding:18px;place-items:center;
+}
+.capture-route-modal.visible{display:grid}
+.capture-route-card{
+  position:relative;width:min(100%,520px);max-height:min(82dvh,760px);overflow:auto;
+  padding:clamp(20px,4vw,30px);border:1px solid #8279ec;border-radius:22px;
+  background:linear-gradient(145deg,#171a31 0%,#0c1020 68%,#12182a 100%);
+  box-shadow:0 28px 90px #000b,0 0 0 1px #67dcf133,inset 0 1px 0 #ffffff12;
+}
+.capture-route-card h2{font:700 clamp(24px,5vw,32px)/1.15 'Playfair Display',serif;color:#f7f7ff;margin:9px 34px 8px 0}
+.capture-route-intro{color:#b9bfd8;font-size:13px;line-height:1.55;margin:0 0 18px}
+.capture-route-close{position:absolute;right:15px;top:15px;border:1px solid #ffffff20;border-radius:10px;width:36px;height:36px;background:#ffffff0b;color:#f7f7ff;font-size:23px}
+.capture-route-options{display:grid;gap:10px;margin-bottom:15px}
+.capture-route-option{display:grid;grid-template-columns:1fr auto;align-items:center;gap:6px 12px;text-align:left;width:100%;padding:14px;border-radius:13px;border:1px solid #393e66;background:linear-gradient(110deg,#171c37,#111729);color:#f5f6ff;transition:border-color .15s,transform .15s,background .15s}
+.capture-route-option:hover,.capture-route-option:focus-visible{border-color:#77e5f7;background:linear-gradient(110deg,#252447,#132735);transform:translateY(-1px)}
+.capture-route-number{grid-column:1/-1;font-size:9px;letter-spacing:.18em;font-weight:800;color:#ff78d5}
+.capture-route-option strong{font-size:clamp(12px,2.8vw,15px);line-height:1.5;overflow-wrap:anywhere}
+.capture-route-option small{font-size:10px;font-weight:700;color:#7ee6f5;white-space:nowrap}
+.capture-route-cancel{width:100%;border-color:#393e66;background:#10162a;color:#d6daf0}
+@media(max-width:560px){
+  .capture-route-modal{padding:12px}
+  .capture-route-card{border-radius:18px;padding:20px 16px}
+  .capture-route-option{padding:12px;gap:6px 8px}
+  .capture-route-option strong{font-size:12px}
+}
