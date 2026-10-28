@@ -1,0 +1,12 @@
+{
+  "appId": "com.chessdraftarena.app",
+  "appName": "Chess & Draft Arena",
+  "webDir": "dist",
+  "server": {
+    "url": "https://chess-draft-arena.onrender.com",
+    "cleartext": false
+  },
+  "android": {
+    "allowMixedContent": false
+  }
+}
